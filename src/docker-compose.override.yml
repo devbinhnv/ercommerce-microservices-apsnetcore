@@ -16,7 +16,7 @@ services:
 
   #productdb: mysql
   productdb:
-    container_name: mysqldb
+    container_name: productdb
     environment:
       MYSQL_ROOT_PASSWORD: 'Passw0rd!'
     restart: always
