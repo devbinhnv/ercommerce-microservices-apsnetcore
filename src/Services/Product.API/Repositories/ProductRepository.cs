@@ -14,9 +14,9 @@ public class ProductRepository : RepositoryBaseAsync<CatalogProduct, long, Produ
     }
     public async Task<IEnumerable<CatalogProduct>> GetProducts() => await FindAll().ToListAsync();
 
-    public async Task<CatalogProduct?> GetProduct(long id) => await GetByIdAsync(id);
+    public async Task<CatalogProduct> GetProduct(long id) => await GetByIdAsync(id);
 
-    public async Task<CatalogProduct?> GetProductByNo(string productNo) =>
+    public async Task<CatalogProduct> GetProductByNo(string productNo) =>
         await FindByCondition(p => p.No.Equals(productNo)).SingleOrDefaultAsync();
 
     public Task CreateProduct(CatalogProduct product) => CreateAsync(product);
@@ -25,6 +25,6 @@ public class ProductRepository : RepositoryBaseAsync<CatalogProduct, long, Produ
     public async Task DeleteProduct(long id)
     {
         var product = await GetProduct(id);
-        if (product != null) DeleteAsync(product);
+        if (product != null) await DeleteAsync(product);
     }
 }
