@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
@@ -15,6 +16,7 @@
     <ProjectReference Include="..\..\BuildingBlocks\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
 ﻿using Contracts.Common;
 using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
 using Product.API.Repositories;
 using Product.API.Repositories.Intefaces;
+using AutoMapper;
 
 namespace Product.API.Extensions;
 
@@ -16,6 +16,7 @@ public static class ServiceExtensions
     {
         // Add services to the container.
         services.AddControllers();
+        // Auto convert url to lowercase
         services.Configure<RouteOptions>(options =>
         {
             options.LowercaseUrls = true;
@@ -24,10 +25,13 @@ public static class ServiceExtensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.ConfigureProductDbContext(configuration);
+        services.AddInfrastructureServices();
+        services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+
         return services;
     }
 
-    private static IServiceCollection ConfigureProductDbContext(this IServiceCollection service, IConfiguration configuration)
+    private static IServiceCollection ConfigureProductDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnectionString") 
             ?? throw new InvalidOperationException("Connection string isn't valid");
@@ -35,7 +39,7 @@ public static class ServiceExtensions
         // Use to parse connection string
         var builder = new MySqlConnectionStringBuilder(connectionString);
 
-        service.AddDbContext<ProductContext>(option =>
+        services.AddDbContext<ProductContext>(option =>
         {
             option.UseMySql(builder.ConnectionString, 
                 ServerVersion.AutoDetect(builder.ConnectionString),
@@ -43,12 +47,12 @@ public static class ServiceExtensions
                 {
                     // Specify the project containing the migration
                     e.MigrationsAssembly("Product.API");
+                    // Ignore scheme for DBMS doesn't have "scheme" mechanism
                     e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
                 });
         });
-        service.AddInfrastructureServices();
 
-        return service;
+        return services;
     }
 
     private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
