@@ -1,8 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contracts.Common;
+using Infrastructure.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
+using Product.API.Repositories;
+using Product.API.Repositories.Intefaces;
 
 namespace Product.API.Extensions;
 
@@ -42,6 +46,17 @@ public static class ServiceExtensions
                     e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
                 });
         });
+        service.AddInfrastructureServices();
+
         return service;
+    }
+
+    private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))
+                .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
+                .AddScoped<IProductRepository, ProductRepository>();
+
+        return services;
     }
 }

@@ -6,39 +6,39 @@ using System.Linq.Expressions;
 
 namespace Contracts.Common;
 
-public interface IRepositoryQueryBase<T, K, TContext>
-    where T : EntityBase<K>
+public interface IRepositoryQueryBase<TEntity, TKey, TContext>
+    where TEntity : EntityBase<TKey>
     where TContext : DbContext
 {
-    IQueryable<T> FindAll(bool trackChanges = false);
+    IQueryable<TEntity> FindAll(bool trackChanges = false);
 
-    IQueryable<T> FindAll(bool trackChanges = false, params Expression<Func<T, object>>[] includeProperties);
+    IQueryable<TEntity> FindAll(bool trackChanges = false, params Expression<Func<TEntity, object>>[] includeProperties);
 
-    IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false);
+    IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression, bool trackChanges = false);
 
-    IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false,
-        params Expression<Func<T, object>>[] includeProperties);
+    IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression, bool trackChanges = false,
+        params Expression<Func<TEntity, object>>[] includeProperties);
 
-    Task<T?> GetByIdAsync(K id);
+    Task<TEntity?> GetByIdAsync(TKey id);
 
-    Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties);
+    Task<TEntity?> GetByIdAsync(TKey id, params Expression<Func<TEntity, object>>[] includeProperties);
 }
 
-public interface IRepositoryBaseAsync<T, K, TContext> : IRepositoryQueryBase<T, K, TContext>
-    where T : EntityBase<K>
+public interface IRepositoryBaseAsync<TEntity, TKey, TContext> : IRepositoryQueryBase<TEntity, TKey, TContext>
+    where TEntity : EntityBase<TKey>
     where TContext : DbContext
 {
-    Task<K> CreateAsync(T entity);
+    Task<TKey> CreateAsync(TEntity entity);
 
-    Task<IList<K>> CreateListAsync(IEnumerable<T> entities);
+    Task<IList<TKey>> CreateListAsync(IEnumerable<TEntity> entities);
 
-    Task UpdateAsync(T entity);
+    Task UpdateAsync(TEntity entity);
 
-    Task UpdateListAsync(IEnumerable<T> entities);
+    Task UpdateListAsync(IEnumerable<TEntity> entities);
 
-    Task DeleteAsync(T entity);
+    Task DeleteAsync(TEntity entity);
 
-    Task DeleteListAsync(IEnumerable<T> entities);
+    Task DeleteListAsync(IEnumerable<TEntity> entities);
 
     Task<IDbContextTransaction> BeginTransactionAsync();
 
