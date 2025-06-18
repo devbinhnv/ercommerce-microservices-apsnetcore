@@ -26,7 +26,9 @@ public static class ServiceExtensions
         services.AddSwaggerGen();
         services.ConfigureProductDbContext(configuration);
         services.AddInfrastructureServices();
-        services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+
+        services.AddAutoMapper([typeof(MappingProfile)]);
+        //services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile())); // or use this way
 
         return services;
     }
