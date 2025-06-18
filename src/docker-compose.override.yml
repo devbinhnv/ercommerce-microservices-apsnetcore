@@ -74,15 +74,15 @@ services:
   #   volumes:
   #     - pgadmin_data:/root/.pgadmin
 
-  portainer: 
-    container_name: portainer
-    restart: always
-    ports:
-      - "8080:8000"
-      - "9000:9000"
-    volumes:
-      - /`var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+  # portainer: 
+  #   container_name: portainer
+  #   restart: always
+  #   ports:
+  #     - "8080:8000"
+  #     - "9000:9000"
+  #   volumes:
+  #     - /`var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
  
 
   elasticsearch:
@@ -106,3 +106,15 @@ services:
     ports:
       - "5601:5601"
 
+  #microservice api section
+  product.api:
+    container_name: product.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "ConnectionStrings__DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDb;Uid=root;Pwd=Passw0rd!;" 
+    depends_on:
+      - productdb
+    ports:
+      - "6002:80"
+    restart: always
