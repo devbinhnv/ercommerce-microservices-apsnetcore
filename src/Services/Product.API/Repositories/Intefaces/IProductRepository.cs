@@ -8,9 +8,9 @@ public interface IProductRepository : IRepositoryBaseAsync<CatalogProduct, long,
 {
     Task<IEnumerable<CatalogProduct>> GetProducts();
 
-    Task<CatalogProduct?> GetProduct(long id);
+    Task<CatalogProduct> GetProduct(long id);
 
-    Task<CatalogProduct?> GetProductByNo(string productNo);
+    Task<CatalogProduct> GetProductByNo(string productNo);
 
     Task CreateProduct(CatalogProduct product);
 

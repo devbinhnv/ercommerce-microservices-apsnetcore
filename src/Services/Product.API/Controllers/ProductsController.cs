@@ -1,17 +1,14 @@
 using AutoMapper;
-using Contracts.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Product.API.Entities;
-using Product.API.Persistence;
 using Product.API.Repositories.Intefaces;
 using Shared.DTOs.Product;
-using System.ComponentModel.DataAnnotations;
 
 namespace Product.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -45,12 +42,18 @@ namespace Product.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createDto)
         {
+            var productEntity = await _productRepository.GetProductByNo(createDto.No);
+            if(productEntity != null)
+            {
+                return BadRequest($"Product No: {createDto.No} is exist.");
+            }
+
             var product = _mapper.Map<CatalogProduct>(createDto);
             await _productRepository.CreateProduct(product);
             await _productRepository.SaveChangeAsync();
 
             var result = _mapper.Map<ProductDto>(product);
-            return Ok(result);
+            return NoContent();
         }
 
         [HttpPut("{id:long}")]
