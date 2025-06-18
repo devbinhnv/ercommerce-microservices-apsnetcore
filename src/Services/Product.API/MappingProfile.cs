@@ -12,6 +12,7 @@ public class MappingProfile : Profile
         CreateMap<CatalogProduct, ProductDto>();
         CreateMap<CreateProductDto, CatalogProduct>();
         CreateMap<UpdateProductDto, CatalogProduct>()
-            .IgnoreAllNonExisting(); //[Extension method]: Ignore fields non existing when map
+            .IgnoreAllNonExisting() //[Extension method]: Ignore fields non existing when map
+            .IgnoreNullProperties(); //[Extension method]: Ignore fields that has null value
     }
 }
