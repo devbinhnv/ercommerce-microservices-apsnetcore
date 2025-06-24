@@ -31,7 +31,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin1234
-      - POSTGRESDB_NAME=DiscountDb 
+      - POSTGRESDB_NAME=Customerdb 
     restart: always
     ports:
       - "5433:5432"
@@ -63,26 +63,26 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-  # pgadmin: 
-  #   container_name: pgadmin
-  #   environment:
-  #     - PGADMIN_DEFAULT_EMAIL=admin@micros_ercommerce.com
-  #     - PGADMIN_DEFAULT_PASSWORD=admin1234 
-  #   restart: always
-  #   ports:
-  #     - "5050:80"
-  #   volumes:
-  #     - pgadmin_data:/root/.pgadmin
+  pgadmin: 
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@micros-ercommerce.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234 
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
 
-  # portainer: 
-  #   container_name: portainer
-  #   restart: always
-  #   ports:
-  #     - "8080:8000"
-  #     - "9000:9000"
-  #   volumes:
-  #     - /`var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
+  portainer: 
+    container_name: portainer
+    restart: always
+    ports:
+      - "8080:8000"
+      - "9000:9000"
+    volumes:
+      - /`var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
  
 
   elasticsearch:

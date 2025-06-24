@@ -19,11 +19,11 @@ services:
   rabbitmq: 
     image: rabbitmq:3-management-alpine
   
-  # pgadmin:
-  #   image: dpage/pgadmin4
+  pgadmin:
+    image: dpage/pgadmin4
 
-  # portainer:
-  #   image: portainer/portainer-ce
+  portainer:
+    image: portainer/portainer-ce
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2
@@ -51,14 +51,14 @@ volumes:
     name: mysql_data
   postgres_data:
     name: posgres_data
-  # portainer_data:
-  #   name: portainer_data
+  portainer_data:
+    name: portainer_data
   elasticsearch_data:
     name: elasticsearch_data
   jeager_data:
     name: jeager_data
   mongo_data:
     name: mongo_data
-  # pgadmin_data:
-  #   name: pgadmin_data
+  pgadmin_data:
+    name: pgadmin_data
 
