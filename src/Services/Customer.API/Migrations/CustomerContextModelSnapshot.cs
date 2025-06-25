@@ -21,7 +21,7 @@ namespace Customer.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Customer.API.Entities.Customer", b =>
+            modelBuilder.Entity("Customer.API.Entities.CustomerEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

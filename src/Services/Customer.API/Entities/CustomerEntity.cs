@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Customer.API.Entities;
 
-public class Customer : EntityBase<int>
+[Table("Customers")]
+public class CustomerEntity : EntityBase<int>
 {
     [Required]
     public string UserName { get; set; }

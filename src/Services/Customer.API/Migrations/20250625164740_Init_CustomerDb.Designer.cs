@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Customer.API.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    [Migration("20250624094245_Init_CustomerDb")]
+    [Migration("20250625164740_Init_CustomerDb")]
     partial class Init_CustomerDb
     {
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace Customer.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Customer.API.Entities.Customer", b =>
+            modelBuilder.Entity("Customer.API.Entities.CustomerEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

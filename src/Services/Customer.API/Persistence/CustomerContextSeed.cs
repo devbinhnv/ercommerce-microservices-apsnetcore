@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Customer.API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Customer.API.Persistence;
 
@@ -22,7 +23,7 @@ public static class CustomerContextSeed
 
         if(customer == null)
         {
-            var newCustomer = new Entities.Customer
+            var newCustomer = new CustomerEntity
             {
                 UserName = userName,
                 FirstName = firstName,
