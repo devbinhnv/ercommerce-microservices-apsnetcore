@@ -4,17 +4,17 @@ using Product.API.Persistence;
 
 namespace Product.API.Repositories.Intefaces;
 
-public interface IProductRepository : IRepositoryBaseAsync<CatalogProduct, long, ProductContext>
+public interface IProductRepository : IRepositoryBaseAsync<ProductEntity, long, ProductContext>
 {
-    Task<IEnumerable<CatalogProduct>> GetProducts();
+    Task<IEnumerable<ProductEntity>> GetProducts();
 
-    Task<CatalogProduct> GetProduct(long id);
+    Task<ProductEntity> GetProduct(long id);
 
-    Task<CatalogProduct> GetProductByNo(string productNo);
+    Task<ProductEntity> GetProductByNo(string productNo);
 
-    Task CreateProduct(CatalogProduct product);
+    Task CreateProduct(ProductEntity product);
 
-    Task UpdateProduct(CatalogProduct product);
+    Task UpdateProduct(ProductEntity product);
 
     Task DeleteProduct(long id);
 }

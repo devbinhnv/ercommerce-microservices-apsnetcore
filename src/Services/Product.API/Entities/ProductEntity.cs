@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Product.API.Entities;
 
-public class CatalogProduct : EntityAuditBase<long>
+[Table("Product")]
+public class ProductEntity : EntityAuditBase<long>
 {
     [Required]
     [Column(TypeName = "nvarchar(50)")]

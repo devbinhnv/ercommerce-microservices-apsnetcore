@@ -9,11 +9,11 @@ using Product.API.Persistence;
 
 #nullable disable
 
-namespace Product.API.Migrations
+namespace Product.API.Persistence.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20250618083921_Product_Set_No_IsUnique")]
-    partial class Product_Set_No_IsUnique
+    [Migration("20250625183951_Init_ProductDb")]
+    partial class Init_ProductDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Product.API.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Product.API.Entities.CatalogProduct", b =>
+            modelBuilder.Entity("Product.API.Entities.ProductEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,6 +37,7 @@ namespace Product.API.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("LastModifiedDate")
@@ -54,6 +55,7 @@ namespace Product.API.Migrations
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<string>("Summary")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
@@ -61,7 +63,7 @@ namespace Product.API.Migrations
                     b.HasIndex("No")
                         .IsUnique();
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 #pragma warning restore 612, 618
         }

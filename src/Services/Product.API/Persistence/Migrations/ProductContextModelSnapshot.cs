@@ -8,7 +8,7 @@ using Product.API.Persistence;
 
 #nullable disable
 
-namespace Product.API.Migrations
+namespace Product.API.Persistence.Migrations
 {
     [DbContext(typeof(ProductContext))]
     partial class ProductContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace Product.API.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Product.API.Entities.CatalogProduct", b =>
+            modelBuilder.Entity("Product.API.Entities.ProductEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,6 +34,7 @@ namespace Product.API.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("LastModifiedDate")
@@ -51,6 +52,7 @@ namespace Product.API.Migrations
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<string>("Summary")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
@@ -58,7 +60,7 @@ namespace Product.API.Migrations
                     b.HasIndex("No")
                         .IsUnique();
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 #pragma warning restore 612, 618
         }

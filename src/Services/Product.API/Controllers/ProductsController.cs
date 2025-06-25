@@ -48,7 +48,7 @@ namespace Product.API.Controllers
                 return BadRequest($"Product No: {createDto.No} is exist.");
             }
 
-            var product = _mapper.Map<CatalogProduct>(createDto);
+            var product = _mapper.Map<ProductEntity>(createDto);
             await _productRepository.CreateProduct(product);
             await _productRepository.SaveChangeAsync();
 
