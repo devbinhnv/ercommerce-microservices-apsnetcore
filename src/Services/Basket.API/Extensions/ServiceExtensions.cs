@@ -7,7 +7,7 @@ namespace Basket.API.Extensions;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddInfratuctures(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructures(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IBasketRepository, BasketRepository>()
                 .AddTransient<ISerializeService, SerializeService>();
