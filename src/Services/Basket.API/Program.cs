@@ -1,3 +1,4 @@
+using Basket.API.Extensions;
 using Common.Logging;
 using Serilog;
 
@@ -5,15 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 
-Log.Information("Stating Basket API");
+Log.Information($"Stating Inventory {builder.Environment.ApplicationName}");
 try
 {
-    // Use common config Seri logger
+    builder.AddAppConfiguration();
     builder.Host.UseSerilog(SeriLogger.Configure);
-    // Add services to the container.
 
+    // Add services to the container.
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
@@ -23,7 +23,10 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{builder.Environment.ApplicationName} v1");
+        });
     }
 
     app.UseHttpsRedirection();
