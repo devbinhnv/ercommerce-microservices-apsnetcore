@@ -2,12 +2,14 @@ using Common.Logging;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-// Use common config Seri logger
-builder.Host.UseSerilog(SeriLogger.Configure);
+
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 
 Log.Information("Stating Inventory API");
 try
 {
+    // Use common config Seri logger
+    builder.Host.UseSerilog(SeriLogger.Configure);
     // Add services to the container.
 
     builder.Services.AddControllers();
