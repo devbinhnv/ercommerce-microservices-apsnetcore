@@ -4,7 +4,7 @@ public class Cart
 {
     public string UserName { get; set; }
 
-    public IEnumerable<CardItem> Items { get; set; } = new List<CardItem>();
+    public IEnumerable<CartItem> Items { get; set; } = new List<CartItem>();
 
     public Cart()
     {

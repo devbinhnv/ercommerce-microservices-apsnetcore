@@ -1,6 +1,6 @@
 ﻿namespace Basket.API.Entities;
 
-public class CardItem
+public class CartItem
 {
     public int Quantity { get; set; }
 
