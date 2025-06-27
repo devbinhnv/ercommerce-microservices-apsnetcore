@@ -13,6 +13,7 @@ try
     builder.Host.UseSerilog(SeriLogger.Configure);
 
     // Add services to the container.
+    builder.Services.AddInfratuctures(builder.Configuration);
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
