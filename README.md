@@ -72,3 +72,6 @@ docker-compose down
   - dotnet ef migrations add "SampleMigration" -p Ordering.Infrastructure --startup-project Ordering.API --output-dir Persistence/Migrations
   - dotnet ef migrations remove -p Ordering.Infrastructure --startup-project Ordering.API
   - dotnet ef database update -p Ordering.Infrastructure --startup-project Ordering.API
+
+## Run redis cli with docker on Windows:
+ - docker excec -it basketdb sh
