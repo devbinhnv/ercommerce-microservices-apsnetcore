@@ -30,7 +30,7 @@ try
         });
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection(); // Only in production
 
     app.UseAuthorization();
 
