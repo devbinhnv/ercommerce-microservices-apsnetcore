@@ -5,6 +5,8 @@ using Product.API.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
+
 Log.Information("Starting Product API...");
 try
 {

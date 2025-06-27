@@ -2,33 +2,53 @@
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs.Customer;
 
-namespace Customer.API.Controllers;
+namespace Customer.API.Apis;
 
 public static class CustomerApi
 {
-    public static void MapCustomersAPI(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapCustomersAPI (this IEndpointRouteBuilder builder)
     {
-        app.MapGet("/api/customers", GetCustomersAsync);
-        app.MapGet("/api/customers/{customerName}", GetCustomerByUserNameAsync);
-        app.MapPost("/api/customers", CreateCustomerAsync);
-        app.MapDelete("/api/customers/{id}", DeleteCustomerAsync);
-        app.MapPut("/api/customers/{id}", UpdateCustomerAsync);
+        builder.MapGroup("/api/v1")
+               .MapCustomersAPI()
+               .WithTags("Customer Api");
+
+        return builder;
+    }
+    public static RouteGroupBuilder MapCustomersAPI(this RouteGroupBuilder group)
+    {
+        group.MapGet("customers", GetCustomersAsync);
+        group.MapGet("customers/{customerName}", GetCustomerByUserNameAsync);
+        group.MapPost("customers", CreateCustomerAsync);
+        group.MapDelete("customers/{id}", DeleteCustomerAsync);
+        group.MapPut("customers/{id}", UpdateCustomerAsync);
+
+        return group;
     }
 
     private static async Task<IResult> GetCustomersAsync(ICustomerService customerService)
-        => await customerService.GetCustomersAsync();
+    {
+        return await customerService.GetCustomersAsync();
+    }
 
     private static async Task<IResult> GetCustomerByUserNameAsync( string customerName, ICustomerService customerService)
-        => await customerService.GetCustomerByUserNameAsync(customerName);
+    {
+        return await customerService.GetCustomerByUserNameAsync(customerName);
+    }
 
     private static async Task<IResult> CreateCustomerAsync(CreateCustomerDto newCustomer, ICustomerService customerService)
-        => await customerService.CreateCustomerAsync(newCustomer);
+    {
+        return await customerService.CreateCustomerAsync(newCustomer);
+    }
 
     private static async Task<IResult> DeleteCustomerAsync (int id, ICustomerService customerService)
-        => await customerService.DeleteCustomerAsync(id);
+    {
+        return await customerService.DeleteCustomerAsync(id);
+    }
 
     private static async Task<IResult> UpdateCustomerAsync(
         [FromQuery]int id, [FromBody] UpdateCustomerDto updateDto,
         ICustomerService customerService)
-        => await customerService.UpdateCustomerAsync(id, updateDto);
+    {
+        return await customerService.UpdateCustomerAsync(id, updateDto);
+    }
 }

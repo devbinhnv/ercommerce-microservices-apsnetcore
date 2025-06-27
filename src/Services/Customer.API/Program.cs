@@ -1,7 +1,7 @@
 using Common.Logging;
 using Contracts.Common;
 using Customer.API;
-using Customer.API.Controllers;
+using Customer.API.Apis;
 using Customer.API.Persistence;
 using Customer.API.Repositories;
 using Customer.API.Repositories.Interfaces;
@@ -13,12 +13,14 @@ using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
-// Use common config Seri logger
-builder.Host.UseSerilog(SeriLogger.Configure);
+
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 
 Log.Information("Stating Customer API");
 try
 {
+    // Use common config Seri logger
+    builder.Host.UseSerilog(SeriLogger.Configure);
     // Add services to the container.
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
