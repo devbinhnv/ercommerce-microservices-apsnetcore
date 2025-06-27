@@ -38,7 +38,7 @@ public class BasketRepository(
         }
     }
 
-    public async Task<Cart> UpdateBasket(Cart cart, DistributedCacheEntryOptions? options = default)
+    public async Task<Cart> CreateOrUpdate(Cart cart, DistributedCacheEntryOptions? options = default)
     {
         logger.Information($"START: UpdateBasket for username {cart.UserName}");
         if (options is null)
