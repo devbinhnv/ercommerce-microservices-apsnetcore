@@ -14,7 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Shared\Shared.csproj" />
     <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\V1\Commands\" />
+    <Folder Include="Features\V1\EventHandlers\" />
+    <Folder Include="Features\V2\Commands\" />
+    <Folder Include="Features\V2\EventHandlers\" />
+    <Folder Include="Features\V2\Queries\" />
   </ItemGroup>
 
 </Project>
