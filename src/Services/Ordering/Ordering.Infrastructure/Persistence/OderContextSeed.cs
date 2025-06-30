@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ordering.Domain.Entities;
-using Ordering.Infrastructure.Persistence;
 using Serilog;
 
-namespace Ordering.Infrastructure;
+namespace Ordering.Infrastructure.Persistence;
 
 public class OderContextSeed(ILogger logger, OrderContext context)
 {
