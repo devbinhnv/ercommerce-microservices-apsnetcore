@@ -4,5 +4,5 @@ namespace Ordering.Application.Common.Mappings;
 
 public interface IMapFrom<T>
 {
-    void Mapping(MappingProfile profile) => profile.CreateMap(typeof(T), GetType());
+    void Mapping(Profile profile) => profile.CreateMap(typeof(T), GetType());
 }
