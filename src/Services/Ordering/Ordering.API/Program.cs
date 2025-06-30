@@ -1,23 +1,32 @@
 using Common.Logging;
+using Ordering.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 
-Log.Information("Stating Ordering API");
+Log.Information($"Starting {builder.Environment.ApplicationName}");
 try
 {
     // Use common config Seri logger
     builder.Host.UseSerilog(SeriLogger.Configure);
     // Add services to the container.
 
+    builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
+    
     var app = builder.Build();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var orderContextSeed = scope.ServiceProvider.GetRequiredService<OderContextSeed>();
+        await orderContextSeed.InitializeAsync();
+        await orderContextSeed.SeedAsync();
+    }
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
@@ -26,7 +35,7 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
@@ -34,9 +43,14 @@ try
 
     app.Run();
 }
-catch (Exception err)
+catch (Exception ex)
 {
-    Log.Fatal(err, "Unhandled exception");
+    string exceptionType = ex.GetType().Name;
+    if (exceptionType.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+    Log.Fatal(ex, "Unhandled exception");
 }
 finally
 {
