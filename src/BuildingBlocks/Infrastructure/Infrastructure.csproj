@@ -8,11 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

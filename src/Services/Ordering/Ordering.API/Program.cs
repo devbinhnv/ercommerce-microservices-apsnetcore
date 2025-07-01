@@ -1,6 +1,11 @@
 using Common.Logging;
 using Contracts.Common;
+using Contracts.Configurations;
+using Contracts.Services;
 using Infrastructure.Common;
+using Infrastructure.Configurations;
+using Infrastructure.Services;
+using Ordering.API.Extensions;
 using Ordering.Application;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Infrastructure;
@@ -17,18 +22,23 @@ try
 {
     // Use common config Seri logger
     builder.Host.UseSerilog(SeriLogger.Configure);
+
+    builder.Host.AddAppConfigurations();
     // Add services to the container.
 
+    builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddApplicationServices();
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddTransient<IOrderRepository, OrderRepository>();
-    builder.Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+    builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+    builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
+    builder.Services.AddScoped<ISmtpEmailService, SmtpEmailService>();
 
     var app = builder.Build();
 
