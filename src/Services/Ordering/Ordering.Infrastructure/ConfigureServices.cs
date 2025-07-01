@@ -12,7 +12,7 @@ public static class ConfigureServices
     {
         services.AddDbContext<OrderContext>(opt =>
         {
-            var builder = new SqlConnectionStringBuilder(configuration.GetConnectionString("DefaultConnection"));
+            var builder = new SqlConnectionStringBuilder(configuration.GetConnectionString("DefaultConnectionString"));
             opt.UseSqlServer(builder.ConnectionString, 
                 optionAction => optionAction.MigrationsAssembly(typeof(OrderContext).Assembly));
         });

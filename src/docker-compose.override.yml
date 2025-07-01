@@ -10,7 +10,7 @@ services:
       ACCEPT_EULA: 'Y'
     restart: always
     volumes:
-      - sqlserver_data:/var/lib/sqlserver/data
+      - sqlserver_data:/var/opt/mssql
     ports:
       - "1435:1433"
 
@@ -141,4 +141,16 @@ services:
       - basketdb
     ports:
       - "6004:80"
+    restart: always
+
+  ordering.api:
+    container_name: ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Passw0rd!;Trust Server Certificate=True"
+    depends_on:
+      - orderdb
+    ports:
+      - "6005:80"
     restart: always
