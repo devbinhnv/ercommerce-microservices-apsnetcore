@@ -1,5 +1,11 @@
 using Common.Logging;
+using Contracts.Common;
+using Infrastructure.Common;
+using Ordering.Application;
+using Ordering.Application.Common.Interfaces;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Persistence;
+using Ordering.Infrastructure.Repositories;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +20,16 @@ try
     // Add services to the container.
 
     builder.Services.AddInfrastructureServices(builder.Configuration);
+    builder.Services.AddApplicationServices();
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    
+
+    builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+    builder.Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+
+
     var app = builder.Build();
 
     using (var scope = app.Services.CreateScope())
