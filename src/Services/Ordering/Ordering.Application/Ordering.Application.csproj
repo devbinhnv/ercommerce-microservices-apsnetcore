@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\V1\Commands\" />
     <Folder Include="Features\V1\EventHandlers\" />
     <Folder Include="Features\V2\Commands\" />
     <Folder Include="Features\V2\EventHandlers\" />
