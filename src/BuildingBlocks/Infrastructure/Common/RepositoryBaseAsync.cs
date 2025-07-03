@@ -23,24 +23,24 @@ public class RepositoryBaseAsync<TEntity, TKey, TContext> : RepositoryQueryBase<
     #region CRUD Operations
     public async Task<TKey> CreateAsync(TEntity entity)
     {
-        await _dbContext.Set<TEntity>().AddAsync(entity);
-        return entity.Id;
+        _dbContext.Set<TEntity>().Add(entity);
+        return await Task.FromResult(entity.Id);
     }
 
     public async Task<IList<TKey>> CreateListAsync(IEnumerable<TEntity> entities)
     {
-        await _dbContext.AddRangeAsync(entities);
-        return entities.Select(e => e.Id).ToList();
+        _dbContext.AddRange(entities);
+        var ids = entities.Select(e => e.Id).ToList();
+        return await Task.FromResult(ids);
     }
 
-    public Task UpdateAsync(TEntity entity)
+    public async Task UpdateAsync(TEntity entity)
     {
-        if (_dbContext.Entry(entity).State == EntityState.Unchanged) return Task.CompletedTask;
+        if (_dbContext.Entry(entity).State == EntityState.Unchanged) return;
 
-        TEntity exist = _dbContext.Set<TEntity>().Find(entity.Id);
-        _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-
-        return Task.CompletedTask;
+        TEntity? exist = await _dbContext.Set<TEntity>().FindAsync(entity.Id);
+        if(exist != null)
+            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
     }
 
     public Task UpdateListAsync(IEnumerable<TEntity> entities)
