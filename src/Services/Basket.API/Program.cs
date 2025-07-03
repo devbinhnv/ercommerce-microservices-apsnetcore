@@ -1,3 +1,4 @@
+using Basket.API;
 using Basket.API.Extensions;
 using Common.Logging;
 using Serilog;
@@ -9,10 +10,20 @@ Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger()
 Log.Information($"Stating Inventory {builder.Environment.ApplicationName}");
 try
 {
-    builder.AddAppConfiguration();
     builder.Host.UseSerilog(SeriLogger.Configure);
+    builder.AddAppConfiguration();
+    builder.Services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
 
     // Add services to the container.
+    builder.Services.ConfigueRedis();
+    builder.Services.Configure<RouteOptions>(option =>
+    {
+        option.LowercaseUrls = true;
+    });
+
+    // Configure MassTransit
+    builder.Services.ConfigureMassTransit();
+
     builder.Services.AddInfrastructures(builder.Configuration);
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
