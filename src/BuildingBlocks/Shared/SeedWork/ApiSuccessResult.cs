@@ -7,7 +7,7 @@ public class ApiSuccessResult<T> : ApiResult<T>
         
     }
 
-    public ApiSuccessResult(T data, string message) : base (true, data, message)
+    public ApiSuccessResult(T data, string message = "Success") : base (true, data, message)
     {
         
     }

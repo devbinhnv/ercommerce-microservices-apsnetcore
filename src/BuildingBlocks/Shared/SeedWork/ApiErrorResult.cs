@@ -7,7 +7,7 @@ public class ApiErrorResult<T> : ApiResult<T>
         
     }
     
-    public ApiErrorResult(string message) : base(false, message)
+    public ApiErrorResult(string message = "Error") : base(false, message)
     {
         
     }
