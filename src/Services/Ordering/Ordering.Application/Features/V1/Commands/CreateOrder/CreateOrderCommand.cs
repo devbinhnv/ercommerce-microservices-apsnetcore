@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EvenBus.Messages.IntegrationEvents.Events;
+using Infrastructure.Mappings;
 using MediatR;
 using Ordering.Application.Common.Mappings;
 using Ordering.Domain.Entities;
@@ -12,6 +14,9 @@ public class CreateOrderCommand : CreateOrUpdateCommand, IRequest<ApiResult<long
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<CreateOrderCommand, OrderEntity>();
+        profile.CreateMap<CreateOrderCommand, OrderEntity>()
+            .IgnoreAllNonExisting()
+            .IgnoreNullProperties();
+        profile.CreateMap<BasketCheckoutEvent, CreateOrderCommand>();
     }
 }

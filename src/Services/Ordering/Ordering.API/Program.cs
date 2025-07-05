@@ -1,9 +1,7 @@
 using Common.Logging;
 using Contracts.Common;
-using Contracts.Configurations;
 using Contracts.Services;
 using Infrastructure.Common;
-using Infrastructure.Configurations;
 using Infrastructure.Services;
 using Ordering.API.Extensions;
 using Ordering.Application;
@@ -29,6 +27,7 @@ try
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddApplicationServices();
+    builder.Services.ConfigureMassTransit();
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

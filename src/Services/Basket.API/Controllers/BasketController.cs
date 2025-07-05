@@ -61,7 +61,7 @@ public class BasketController(
         // publish event checkout to event bus
         var eventMessage = mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMessage.TotalPrice = basket.TotalPrice;
-        _ = publishEndpoint.Publish(eventMessage);
+        await publishEndpoint.Publish(eventMessage);
 
         // remove basket after send message
         await basketRepository.DeleteBasketFromUserName(basketCheckout.UserName);

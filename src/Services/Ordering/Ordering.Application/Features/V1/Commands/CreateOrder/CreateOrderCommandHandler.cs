@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Contracts.Services;
 using FluentValidation;
-using Infrastructure.Services;
 using MediatR;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Domain.Entities;
 using Serilog;
 using Shared.SeedWork;
 using Shared.Services.Email;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
-using ValidationException = Ordering.Application.Common.Exceptions.ValidationException;
 
 namespace Ordering.Application.Features.V1.Commands;
 
@@ -50,7 +47,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
 
             var newOrder = _mapper.Map<OrderEntity>(request);
             await _repository.CreateAsync(newOrder);
-            _repository.SaveChangeAsync();
+            await _repository.SaveChangeAsync();
             SendMailAsync(newOrder, cancellationToken);
 
             _logger.Information($"END: CreateOrderCommandHandler");

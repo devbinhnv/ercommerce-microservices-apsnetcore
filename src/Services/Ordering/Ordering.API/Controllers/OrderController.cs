@@ -18,7 +18,7 @@ public class OrderController(
     private static class RouteNames
     {
         internal const string GetOrders = nameof(GetOrders);
-        internal const string CreateOrder = nameof(CreateOrder);
+        //internal const string CreateOrder = nameof(CreateOrder);
         internal const string UpdateOrder = nameof(UpdateOrder);
         internal const string DeleteOrder = nameof(DeleteOrder);
 
@@ -33,13 +33,13 @@ public class OrderController(
         return Ok(result);
     }
 
-    [HttpPost(Name = RouteNames.CreateOrder)]
-    [ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody]CreateOrderCommand command)
-    {
-        var result = await mediator.Send(command);
-        return Ok(result);
-    }
+    //[HttpPost(Name = RouteNames.CreateOrder)]
+    //[ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
+    //public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody]CreateOrderCommand command)
+    //{
+    //    var result = await mediator.Send(command);
+    //    return Ok(result);
+    //}
 
     [HttpPut("{id:long}", Name = RouteNames.UpdateOrder)]
     [ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
