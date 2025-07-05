@@ -12,6 +12,8 @@ public class OrderEntity : EntityAuditBase<long>
     [Column(TypeName = "nvarchar(150)")]
     public string UserName { get; set; }
 
+    public Guid DocumentNo { get; set; } = Guid.NewGuid();
+
     [Column(TypeName ="decimal(10,2)")]
     public decimal TotalPrice { get; set; }
 
