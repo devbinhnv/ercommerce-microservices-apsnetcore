@@ -4,7 +4,7 @@ using Shared.SeedWork;
 
 namespace Ordering.Application.Features.V1.Commands;
 
-public class DeleteOrderCommand : IRequest
+public class DeleteOrderCommand : IRequest<Unit>
 {
     public long Id { get; private set; }
 

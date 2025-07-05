@@ -6,7 +6,7 @@ using Serilog;
 
 namespace Ordering.Application.Features.V1.Commands.DeleteOrder;
 
-public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
+public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, Unit>, IDeleteOrderCommandHandler
 {
     private readonly IOrderRepository _repository;
     private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
         _mapper = mapper;
         _logger = logger;
     }
-    public async Task Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -30,11 +30,12 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
             var deletingOrder = await _repository.GetByIdAsync(request.Id);
             if (deletingOrder != null)
             {
-                await _repository.DeleteAsync(deletingOrder);
-                await _repository.SaveChangeAsync();
-            }    
-            
+                _repository.DeleteAsync(deletingOrder);
+                _repository.SaveChangeAsync();
+            }
+
             _logger.Information($"END: DeleteOrderCommandHandler with order {request.Id}");
+            return Unit.Value;
         }
         catch (Exception ex)
         {

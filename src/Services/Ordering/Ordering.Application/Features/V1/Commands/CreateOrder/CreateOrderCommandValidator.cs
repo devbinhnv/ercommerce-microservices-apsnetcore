@@ -15,10 +15,6 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
         RuleFor(x => x.EmailAddress)
             .EmailAddress().WithMessage($"{instance.EmailAddress} is invalid Email format.");
 
-        RuleFor(x => x.TotalPrice)
-            .NotEmpty().WithMessage("Total is required")
-            .GreaterThan(0).WithMessage("Total price is greater than 0.");
-
         return base.ValidateAsync(context, cancellation);
     }
 }
