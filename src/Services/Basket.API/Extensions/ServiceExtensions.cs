@@ -1,6 +1,6 @@
 ﻿using Basket.API.Repositories;
 using Basket.API.Repositories.interfaces;
-using Contracts.Common;
+using Contracts.Common.Interfaces;
 using EvenBus.Messages.IntegrationEvents.Interfaces;
 using Infrastructure.Common;
 using Infrastructure.Configurations;
