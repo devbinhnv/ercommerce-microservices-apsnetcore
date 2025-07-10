@@ -9,6 +9,7 @@ COPY ["BuildingBlocks/Common.Logging/Common.Logging.csproj", "BuildingBlocks/Com
 COPY ["BuildingBlocks/Contracts/Contracts.csproj", "BuildingBlocks/Contracts/"]
 COPY ["BuildingBlocks/Infrastructure/Infrastructure.csproj", "BuildingBlocks/Infrastructure/"]
 COPY ["BuildingBlocks/Shared/Shared.csproj", "BuildingBlocks/Shared/"]
+COPY ["BuildingBlocks/EvenBus/EvenBus.Messages/EvenBus.Messages.csproj", "BuildingBlocks/EvenBus/EvenBus.Messages/"]
 
 RUN dotnet restore "Services/Basket.API/Basket.API.csproj"
 COPY . .

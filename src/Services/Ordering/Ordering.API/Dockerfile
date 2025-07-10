@@ -9,7 +9,7 @@ COPY ["Services/Ordering/Ordering.API/Ordering.API.csproj","Services/Ordering/Or
 COPY ["BuildingBlocks/Common.Logging/Common.Logging.csproj","BuildingBlocks/Common.Logging/"]
 COPY ["Services/Ordering/Ordering.Application/Ordering.Application.csproj","Services/Ordering/Ordering.Application/"]
 COPY ["Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj","Services/Ordering/Ordering.Infrastructure/"]
-
+COPY ["BuildingBlocks/EvenBus/EvenBus.Messages/EvenBus.Messages.csproj", "BuildingBlocks/EvenBus/EvenBus.Messages/"]
 
 RUN dotnet restore "Services/Ordering/Ordering.API/Ordering.API.csproj"
 COPY . .
