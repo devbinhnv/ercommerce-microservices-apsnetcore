@@ -31,7 +31,9 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, Uni
             if (deletingOrder != null)
             {
                 _repository.DeleteAsync(deletingOrder);
-                _repository.SaveChangeAsync();
+                // Raise a domain event
+                deletingOrder.DeletedOrder();
+                await _repository.SaveChangeAsync();
             }
 
             _logger.Information($"END: DeleteOrderCommandHandler with order {request.Id}");

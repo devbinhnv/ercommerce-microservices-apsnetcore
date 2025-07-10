@@ -1,6 +1,6 @@
 ﻿using Basket.API.Entities;
 using Basket.API.Repositories.interfaces;
-using Contracts.Common;
+using Contracts.Common.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using ILogger = Serilog.ILogger;
 
