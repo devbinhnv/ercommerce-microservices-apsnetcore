@@ -1,4 +1,4 @@
-﻿namespace Contracts.Common;
+﻿namespace Contracts.Common.Interfaces;
 
 public interface ISerializeService
 {
