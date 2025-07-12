@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "src\Services\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.API", "src\Services\Customer.API\Customer.API.csproj", "{420D0962-E4A7-490F-9788-7EB67E74A483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.API", "src\Services\Inventory.Product.API\Inventory.API.csproj", "{5212EE99-2873-40F6-B147-03AEAE5C624E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Product.API", "src\Services\Inventory.Product.API\Inventory.Product.API.csproj", "{5212EE99-2873-40F6-B147-03AEAE5C624E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "src\Services\Product.API\Product.API.csproj", "{FC2CA651-AF57-4796-822A-2AD9A1DB5AFA}"
 EndProject
@@ -70,6 +70,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{D779C4BE-8BEB-495D-BAE9-10164F4A4575}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvenBus.Messages", "src\BuildingBlocks\EvenBus\EvenBus.Messages\EvenBus.Messages.csproj", "{E4210B15-CEB5-0BCD-CC73-55AE9DDF6C69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{DB83262E-71E3-4487-AB64-D7E900028E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +175,7 @@ Global
 		{D3B8F631-3749-42C6-A8FB-53E4D44B486A} = {3FE3446B-9F90-4B50-AA96-D6D6DDFC0607}
 		{D779C4BE-8BEB-495D-BAE9-10164F4A4575} = {21379BA6-8421-4D0B-BD34-B256E7292273}
 		{E4210B15-CEB5-0BCD-CC73-55AE9DDF6C69} = {D779C4BE-8BEB-495D-BAE9-10164F4A4575}
+		{DB83262E-71E3-4487-AB64-D7E900028E13} = {21379BA6-8421-4D0B-BD34-B256E7292273}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B01D258-583A-494E-81E0-96E0D549976E}
