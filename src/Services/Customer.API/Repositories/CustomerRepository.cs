@@ -1,4 +1,4 @@
-﻿using Contracts.Common;
+﻿using Contracts.Domains.Interfaces;
 using Customer.API.Entities;
 using Customer.API.Persistence;
 using Customer.API.Repositories.Interfaces;

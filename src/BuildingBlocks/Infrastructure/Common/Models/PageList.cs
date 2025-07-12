@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using Shared.SeedWork;
 
 namespace Infrastructure.Common.Models;
@@ -22,6 +23,17 @@ public class PageList<T> : List<T>
     public MetaData GetMetaData()
     {
         return _metaData;
+    }
+
+    public static async Task<PageList<T>> ToPagedList(IQueryable<T> source, int pageIndex, int pageSize)
+    {
+        var count = await source.CountAsync();
+        var items = await source
+            .Take(pageSize)
+            .Skip((pageIndex - 1) * pageSize)
+            .ToListAsync();
+
+        return new PageList<T>(items, count, pageIndex, pageSize);
     }
 
     public static async Task<PageList<T>> ToPagedList(IMongoCollection<T> source,

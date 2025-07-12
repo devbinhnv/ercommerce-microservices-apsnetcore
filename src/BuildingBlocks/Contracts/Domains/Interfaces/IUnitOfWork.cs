@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Contracts.Common;
+namespace Contracts.Domains.Interfaces;
 
 public interface IUnitOfWork<TContext> : IDisposable where TContext : DbContext
 {

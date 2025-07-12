@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Contracts.Common;
+namespace Contracts.Common.Interfaces;
 
 public interface IRepositoryQueryBase<TEntity, TKey, TContext> : IRepositoryQueryBase<TEntity, TKey>
     where TEntity : EntityBase<TKey>

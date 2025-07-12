@@ -1,5 +1,5 @@
 using Common.Logging;
-using Contracts.Common;
+using Contracts.Domains.Interfaces;
 using Contracts.Services;
 using Infrastructure.Common;
 using Infrastructure.Services;

@@ -33,14 +33,12 @@ public static class ServiceExtensions
 
     private static string GetMongoConnectionString(this IServiceCollection services)
     {
-        var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
-        ArgumentNullException.ThrowIfNullOrEmpty(settings.ConnectionString, nameof(DatabaseSettings));
+        var settings = services.GetOptions<MongoDbSettings>(nameof(MongoDbSettings));
+        ArgumentNullException.ThrowIfNullOrEmpty(settings.ConnectionString, nameof(MongoDbSettings));
 
         var databaseName = settings.DatabaseName;
         var connectionString = string.Format("{0}/{1}?authSource=admin", 
             settings.ConnectionString, databaseName);
         return connectionString;
     }
-
-
 }

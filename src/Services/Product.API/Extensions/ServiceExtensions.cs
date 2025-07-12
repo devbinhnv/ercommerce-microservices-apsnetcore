@@ -1,5 +1,4 @@
-﻿using Contracts.Common;
-using Infrastructure.Common;
+﻿using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -7,6 +6,8 @@ using Product.API.Persistence;
 using Product.API.Repositories;
 using Product.API.Repositories.Intefaces;
 using AutoMapper;
+using Contracts.Common.Interfaces;
+using Contracts.Domains.Interfaces;
 
 namespace Product.API.Extensions;
 

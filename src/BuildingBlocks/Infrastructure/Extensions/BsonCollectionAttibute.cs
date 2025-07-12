@@ -1,4 +1,4 @@
-﻿namespace Inventory.Product.API.Extensions.Attributes;
+﻿namespace Infrastructure.Extensions;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public class BsonCollectionAttribute : Attribute
@@ -9,3 +9,4 @@ public class BsonCollectionAttribute : Attribute
         CollectionName = collectionName;
     }
 }
+

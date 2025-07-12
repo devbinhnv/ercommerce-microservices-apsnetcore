@@ -1,6 +1,7 @@
 ﻿using Inventory.Product.API.Persistence;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Shared.Configurations;
 
 namespace Inventory.Product.API.Extensions;
 
@@ -10,7 +11,7 @@ public static class HostExtensions
     {
         using var scope = host.Services.CreateScope();
         var services = scope.ServiceProvider;
-        var settings = services.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+        var settings = services.GetRequiredService<IOptions<MongoDbSettings>>().Value;
         ArgumentNullException.ThrowIfNullOrEmpty(settings.ConnectionString);
 
         var mongoClient = services.GetRequiredService<IMongoClient>();

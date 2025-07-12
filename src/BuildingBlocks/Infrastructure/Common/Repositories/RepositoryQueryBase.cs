@@ -1,4 +1,4 @@
-﻿using Contracts.Common;
+﻿using Contracts.Common.Interfaces;
 using Contracts.Domains;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

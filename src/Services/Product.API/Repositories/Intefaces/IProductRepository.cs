@@ -1,4 +1,4 @@
-﻿using Contracts.Common;
+﻿using Contracts.Common.Interfaces;
 using Product.API.Entities;
 using Product.API.Persistence;
 

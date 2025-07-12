@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections;
 
-namespace Contracts.Common;
+namespace Contracts.Common.Interfaces;
 
 public interface IRepositoryBaseAsync<TEntity, TKey, TContext> : IRepositoryBaseAsync<TEntity, TKey>
     where TEntity : EntityBase<TKey>

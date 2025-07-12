@@ -1,8 +1,8 @@
-﻿using Contracts.Common;
+﻿using Contracts.Common.Interfaces;
 using Contracts.Domains;
+using Contracts.Domains.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Linq.Expressions;
 
 namespace Infrastructure.Common;
 
