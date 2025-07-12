@@ -20,7 +20,7 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNo(string itemNo)
+    public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNoAsync(string itemNo)
     {
         var entities = await FindAll()
             .Find(x => x.ItemNo.Equals(itemNo))
@@ -50,7 +50,7 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
         return new PageList<InventoryEntryDto>(result, pagedList.Count, query.PageNumber, query.PageSize);
     }
 
-    public async Task<InventoryEntryDto> GetById(string id)
+    public async Task<InventoryEntryDto> GetByIdAsync(string id)
     {
         var filter = Builders<InventoryEntry>.Filter.Eq(x => x.Id, id);
         var entity = await FindAll()
