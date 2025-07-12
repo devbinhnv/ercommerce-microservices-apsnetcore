@@ -1,7 +1,7 @@
-﻿using Inventory.Product.API.Entities;
+﻿using Infrastructure.Common.Models;
+using Inventory.Product.API.Entities;
 using Inventory.Product.API.Repositories.Abstraction;
 using Shared.DTOs.Inventory;
-using Shared.SeedWork;
 
 namespace Inventory.Product.API.Services.Interfaces;
 

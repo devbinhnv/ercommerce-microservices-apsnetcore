@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Infrastructure.Common.Models;
+using Infrastructure.Extensions;
 using Inventory.Product.API.Entities;
 using Inventory.Product.API.Extensions;
 using Inventory.Product.API.Repositories.Abstraction;
@@ -7,7 +9,6 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Shared.DTOs.Inventory;
-using Shared.SeedWork;
 
 namespace Inventory.Product.API.Services;
 
@@ -40,14 +41,15 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
         }
 
         var andFilter = filterItemNo & filterSearchTerm;
-        var pagedList = await Collection.Find(andFilter)
-            .Skip((query.PageNumber - 1) * query.PageSize)
-            .Limit(query.PageSize)
-            .ToListAsync();
+        var pagedList = await Collection.PaginatedPageAsync(
+            filter: andFilter,
+            pageIndex: query.PageIndex,
+            pageSize: query.PageSize);
 
-        var result = _mapper.Map<IEnumerable<InventoryEntryDto>>(pagedList);
+        var items = _mapper.Map<IEnumerable<InventoryEntryDto>>(pagedList);
+        var result = new PageList<InventoryEntryDto>(items, pagedList.GetMetaData().TotalPages, query.PageIndex, query.PageSize);
 
-        return new PageList<InventoryEntryDto>(result, pagedList.Count, query.PageNumber, query.PageSize);
+        return result;
     }
 
     public async Task<InventoryEntryDto> GetByIdAsync(string id)
@@ -64,7 +66,7 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
     {
         var itemToAdd = new InventoryEntry(ObjectId.GenerateNewId().ToString())
         {
-            ItemNo = model.ItemNo,
+            ItemNo = itemNo,
             Quantity = model.Quantity,
             DocumentType = model.DocumentType
         };
