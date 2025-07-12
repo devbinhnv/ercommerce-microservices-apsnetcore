@@ -26,8 +26,8 @@ public class InventoryEntry : MongoEntity
     public int Quantity { get; set; }
 
     [BsonElement("documentNo")]
-    public string DocumentNo { get; set; }
+    public string DocumentNo { get; set; } = Guid.NewGuid().ToString();
 
     [BsonElement("externalDocumentNo")]
-    public string ExternalDocumentNo { get; set; }
+    public string ExternalDocumentNo { get; set; } = Guid.NewGuid().ToString();
 }
