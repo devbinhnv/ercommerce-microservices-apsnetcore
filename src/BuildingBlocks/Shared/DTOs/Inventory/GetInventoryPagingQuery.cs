@@ -10,5 +10,5 @@ public class GetInventoryPagingQuery : PagingRequestParamaters
 
     public void SetItemNo(string itemNo) => _itemNo = itemNo;
 
-    public string SearchTerm { get; set; }
+    public string SearchTerm { get; set; } = null;
 }
